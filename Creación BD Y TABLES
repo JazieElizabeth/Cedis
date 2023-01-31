@@ -1,0 +1,26 @@
+-- Creación de base de datos
+CREATE DATABASE `cedis` /*!40100 DEFAULT CHARACTER SET utf8mb4 */;
+
+-- Creacion de tablas 
+-- Tabla proveedores:
+-- cedis.ca_proveedor definition
+
+CREATE TABLE `ca_proveedor` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Nombre` varchar(100) DEFAULT NULL,
+  `Empresa` varchar(100) DEFAULT NULL,
+  `Numero_Proveedor` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
+
+-- Tabla de datos cedis
+-- cedis.ma_cedis definition
+
+CREATE TABLE `ma_cedis` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Codigo` varchar(100) DEFAULT NULL,
+  `Descripcion` text DEFAULT NULL,
+  `Numero_Proveedor` varchar(100) DEFAULT NULL,
+  `status` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
