@@ -1,0 +1,58 @@
+-- Guardado de proveedor
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cedis`.`Guardar_Proveedor`(
+	NombreP varchar (50),
+	in Empresa_P varchar (50),
+	in Numero_Provee varchar (50)
+)
+begin
+	declare Numero varchar(50);
+				SET Numero = (select cp.Numero_Proveedor FROM ca_proveedor as cp  WHERE cp.Numero_Proveedor  = Numero_Provee);
+		if Numero = Numero_Provee 
+			then 
+				 SELECT 'No se admiten numeros repetidos';
+
+			else 
+			INSERT INTO cedis.ca_proveedor 
+						(Nombre,Empresa,Numero_Proveedor)
+			values 
+						(NombreP, Empresa_P, Numero_Provee);
+		
+				
+			
+		end if;
+END;
+
+
+-- Actualizar Proveedor
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cedis`.`Actualizar_Proveedor`(
+	in Id_Ac int, 
+	in Nombre_Ac varchar (50), 
+	in Empresa_Ac varchar (50),
+	in Numero_Ac varchar (50)
+)
+begin
+	UPDATE cedis.ca_proveedor
+		SET Nombre=Nombre_Ac, Empresa=Empresa_Ac, Numero_Proveedor=Numero_Ac
+	WHERE id=Id_Ac;
+
+END;
+
+-- Eliminar Proveedor
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cedis`.`Eliminar_Proveedor`(
+	 ID_PRO int
+)
+begin
+	DELETE FROM cedis.ca_proveedor
+		WHERE id=ID_PRO;
+
+END;
+
+-- Seleccionar Proveedor 
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cedis`.`Seleccionar_Proveedor`()
+begin
+	select id, Nombre, Empresa,Numero_Proveedor
+	FROM cedis.ca_proveedor;
+
+END;
