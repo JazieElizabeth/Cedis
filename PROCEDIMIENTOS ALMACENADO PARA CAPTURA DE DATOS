@@ -1,0 +1,73 @@
+-- Guardar Datos
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cedis`.`Guardar`(
+	codigo varchar(50),
+	in descr text, 
+	in Num_Provee varchar(50),
+	in estatus varchar(30)
+)
+begin
+	declare NUMERO varchar(50); 
+			SET NUMERO = (select cp.Numero_Proveedor FROM ca_proveedor as cp  WHERE cp.Numero_Proveedor  = Num_Provee );
+
+	if NUMERO = Num_Provee 
+	then 
+	INSERT INTO cedis.ma_cedis
+				(Codigo, Descripcion, Numero_Proveedor, status)
+	values 
+				(codigo,descr, NUMERO, estatus);
+
+	else 
+	
+			 SELECT 'Verifique el numero de proveedor';
+		
+	
+end if;
+
+END;
+
+Modificar datos CEDIS
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cedis`.`Modificar`(
+	in ID_M INT,
+	CODIGO_M VARCHAR(100),
+	in DESCRIPCION_M VARCHAR (100),
+	in NUMERO_PROVEE_M VARCHAR (100),
+	in STATUS_M VARCHAR (50)
+	
+
+)
+begin
+	UPDATE cedis.ma_cedis
+		SET Codigo=CODIGO_M, Descripcion=DESCRIPCION_M, Numero_Proveedor=NUMERO_PROVEE_M, status=STATUS_M
+		WHERE id=ID_M;
+
+END;
+
+
+Selección Datos CEDIS:
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cedis`.`Seleccionar`()
+begin
+	SELECT id, Codigo, Descripcion, Numero_Proveedor, status
+FROM cedis.ma_cedis;
+
+END;
+
+
+Eliminar datos CEDIS: 
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cedis`.`Eliminar`(
+	ID_E int 
+)
+begin
+	DELETE FROM cedis.ma_cedis
+		WHERE id=ID_E;
+
+END;
+
+--Llenado del ComboBox de Cedis de la tabla ca_proveedor
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cedis`.`Llenados_Datos`()
+begin
+	select id, Numero_Proveedor from cedis.ca_proveedor cp ;
+
+END;
